@@ -701,7 +701,6 @@
   flex-direction: column;
 }
 
-/* Show dropdown when parent is hovered OR has active class */
 .user-profile:hover .profile-dropdown,
 .user-profile.active .profile-dropdown {
   display: flex;
@@ -737,7 +736,7 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar Navigation -->
+    
     <div class="sidebar">
         <div class="sidebar-header">
             <i class="fas fa-hands-helping" style="font-size: 1.8rem;"></i>
@@ -766,9 +765,8 @@
         </div>
     </div>
     
-    <!-- Main Content Area -->
     <div class="main-content">
-        <!-- Top Navigation Bar -->
+       
         <div class="top-nav">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
@@ -776,7 +774,7 @@
             </div>
             
             <div class="user-menu">
-                <!-- In the top-nav section, replace the notification div with this: -->
+       
 <div class="notification">
     <i class="fas fa-bell"></i>
     <span class="badge">2</span>
@@ -815,14 +813,14 @@
             </div>
         </div>
         
-        <!-- Event Content -->
+     
         <div class="event-content">
             <div class="page-header">
                 <h2><i class="fas fa-box-open"></i> Event Management</h2>
                 <button class="btn btn-primary" id="addEventBtn"><i class="fas fa-plus"></i> Create Event</button>
             </div>
             
-            <!-- Filter Bar -->
+    
             <div class="filter-bar">
                 <div class="filter-group">
                     <select class="filter-control">
@@ -846,18 +844,18 @@
                 <button class="btn btn-primary"><i class="fas fa-filter"></i> Apply Filters</button>
             </div>
             
-            <!-- View Toggle -->
+     
             <div class="view-toggle">
                 <button class="view-toggle-btn active" data-view="card"><i class="fas fa-th-large"></i></button>
                 <button class="view-toggle-btn" data-view="table"><i class="fas fa-list"></i></button>
             </div>
             
-            <!-- Card View -->
+          
             <div class="event-cards" id="cardView">
-                <!-- Event Card 1 -->
+               
                 <div class="event-card">
                     <div class="event-card-header">
-                        <img src="https://source.unsplash.com/random/600x400/?health" alt="Health Camp" class="event-card-image">
+                        <img src="health camp.jpg" alt="Health Camp" class="event-card-image">
                         <div class="event-card-date">Jun 15, 2023</div>
                         <div class="event-card-status status-upcoming">Upcoming</div>
                     </div>
@@ -888,10 +886,10 @@
                     </div>
                 </div>
                 
-                <!-- Event Card 2 -->
+               
                 <div class="event-card">
                     <div class="event-card-header">
-                        <img src="https://source.unsplash.com/random/600x400/?food" alt="Food Drive" class="event-card-image">
+                        <img src="food.jpg" alt="Food Drive" class="event-card-image">
                         <div class="event-card-date">Jun 10, 2023</div>
                         <div class="event-card-status status-ongoing">Ongoing</div>
                     </div>
@@ -921,10 +919,9 @@
                     </div>
                 </div>
                 
-                <!-- Event Card 3 -->
                 <div class="event-card">
                     <div class="event-card-header">
-                        <img src="https://source.unsplash.com/random/600x400/?education" alt="Workshop" class="event-card-image">
+                        <img src="youth.jpg" alt="Workshop" class="event-card-image">
                         <div class="event-card-date">Jun 5, 2023</div>
                         <div class="event-card-status status-completed">Completed</div>
                     </div>
@@ -956,10 +953,9 @@
                     </div>
                 </div>
                 
-                <!-- Event Card 4 -->
                 <div class="event-card">
                     <div class="event-card-header">
-                        <img src="https://source.unsplash.com/random/600x400/?clothing" alt="Clothing Drive" class="event-card-image">
+                        <img src="winter.jpg" alt="Clothing Drive" class="event-card-image">
                         <div class="event-card-date">Jun 18, 2023</div>
                         <div class="event-card-status status-upcoming">Upcoming</div>
                     </div>
@@ -989,7 +985,7 @@
                 </div>
             </div>
             
-            <!-- Table View (Hidden by default) -->
+  
             <div class="event-table-container" id="tableView" style="display: none;">
                 <table>
                     <thead>
@@ -1057,7 +1053,7 @@
         </div>
     </div>
     
-    <!-- Add Event Modal -->
+
     <div class="modal" id="addEventModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1124,7 +1120,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // View toggle functionality
+           
             const viewToggleBtns = document.querySelectorAll('.view-toggle-btn');
             const cardView = document.getElementById('cardView');
             const tableView = document.getElementById('tableView');
@@ -1144,7 +1140,6 @@
                 });
             });
             
-            // Modal functionality
             const addEventBtn = document.getElementById('addEventBtn');
             const addEventModal = document.getElementById('addEventModal');
             const closeBtns = document.querySelectorAll('.close-btn, .close-modal');
@@ -1158,8 +1153,7 @@
                     addEventModal.style.display = 'none';
                 });
             });
-            
-            // Close modal when clicking outside
+      
             window.addEventListener('click', function(e) {
                 if (e.target === addEventModal) {
                     addEventModal.style.display = 'none';
@@ -1168,15 +1162,15 @@
         });
     </script>
     <script>
-        // Toggle dropdown on click
+       
         document.getElementById('userProfile').addEventListener('click', function(e) {
-          // Prevent closing when clicking inside dropdown
+          
           if (!e.target.closest('.profile-dropdown')) {
             this.classList.toggle('active');
           }
         });
       
-        // Close when clicking elsewhere
+        
         document.addEventListener('click', function(e) {
           const profile = document.getElementById('userProfile');
           if (!e.target.closest('#userProfile')) {
