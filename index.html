@@ -269,7 +269,15 @@
             <p> Turn goodwill into action.</p>
         </div>
         
-        <form class="login-form" id="login-form">
+        <form class="login-form" id="login-form"+
+        
+        
+        
+        
+        
+        
+        
+        >
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
@@ -348,7 +356,7 @@
             loginMessage.textContent = "Login successful! Redirecting...";
             loginMessage.style.color = "green";
             setTimeout(() => {
-                window.location.href = "https://www.instagram.com/reels/DFGfKimNAC6/";
+                window.location.href = "maindashboard.html";
             }, 1000);
         } else {
             loginMessage.textContent = "Invalid email or password.";
