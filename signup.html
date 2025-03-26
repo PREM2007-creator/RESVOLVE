@@ -265,13 +265,10 @@
         <form class="signup-form" id="signupForm">
             <div class="form-row">
                 <div class="form-group">
-                    <label for="first-name" class="form-label">First Name</label>
-                    <input type="text" id="first-name" class="form-control" required>
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label for="last-name" class="form-label">Last Name</label>
-                    <input type="text" id="last-name" class="form-control" required>
-                </div>
+                
             </div>
             
             <div class="form-group">
@@ -283,7 +280,12 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" class="form-control" minlength="8" required>
                 <small style="color: var(--gray); font-size: 0.8rem;">Minimum 8 characters</small>
-            </div>      
+            </div> 
+            <div class="form-group">
+                <label for="c-password" class="form-label">Confirm Password</label>
+                <input type="password" id="cpassword" class="form-control" minlength="8" required>
+                <small style="color: var(--gray); font-size: 0.8rem;">Passwords should match</small>
+            </div>       
           
             <div class="form-group form-check">
                 <input type="checkbox" id="terms" class="form-check-input" required>
@@ -293,7 +295,7 @@
             </div>
             
             <button type="submit" class="btn btn-primary">Create Account</button>
-            
+            <p id="signup-message"></p>
             <div class="divider">OR</div>
             
             <button type="button" class="btn btn-google">
@@ -310,7 +312,7 @@
     </div>
     
     <script>
-        // Image slideshow functionality
+        
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         
@@ -324,41 +326,32 @@
             showSlide(currentSlide + 1);
         }
         
-        // Change slide every 5 seconds
+       
         setInterval(nextSlide, 5000);
         
-        // Form validation
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate passwords match
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-            
-            // Validate terms checkbox
-            if (!document.getElementById('terms').checked) {
-                alert('You must agree to the Terms of Service and Privacy Policy');
-                return;
-            }
-            
-            // Form is valid - in a real app, you would submit to your backend here
-            alert('Account created successfully! Redirecting to login...');
-            
-            // Redirect to index.html after successful signup
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1500);
-        });
+       
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const signupMessage = document.getElementById("signup-message");
+    signupMessage.textContent = "";
+    localStorage.setItem(email, password);
+    signupMessage.textContent = "Signup successful! Redirecting to login...";
+    signupMessage.style.color = "green";
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 1000);
+});
         
-        // Initialize slideshow
+   
         document.addEventListener('DOMContentLoaded', function() {
             showSlide(0);
         });
+        
+
     </script>
 </body>
 </html>
