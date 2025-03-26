@@ -26,7 +26,7 @@
             background-color: #f9f9f9;
         }
 
-        /* Header/Navbar (Consistent with other pages) */
+
         .top-nav {
             display: flex;
             justify-content: space-between;
@@ -44,7 +44,7 @@
             gap: 10px;
         }
 
-        /* Main Content Container */
+      
         .settings-container {
             max-width: 1200px;
             margin: 30px auto;
@@ -54,7 +54,6 @@
             gap: 30px;
         }
 
-        /* Settings Sidebar */
         .settings-sidebar {
             background: white;
             border-radius: 8px;
@@ -86,7 +85,6 @@
             text-align: center;
         }
 
-        /* Settings Content */
         .settings-content {
             background: white;
             border-radius: 8px;
@@ -235,7 +233,7 @@
     </style>
 </head>
 <body>
-    <!-- Top Navigation (Consistent with other pages) -->
+
     <div class="top-nav">
         <div class="logo">
             <h2><i class="fas fa-hands-helping"></i> NGO Admin Portal</h2>
@@ -246,9 +244,8 @@
         </div>
     </div>
 
-    <!-- Main Settings Content -->
     <div class="settings-container">
-        <!-- Settings Sidebar -->
+
         <div class="settings-sidebar">
             <a href="#" class="settings-menu-item active" data-section="account">
                 <i class="fas fa-user-cog"></i> Account Settings
@@ -267,9 +264,9 @@
             </a>
         </div>
 
-        <!-- Settings Content Area -->
+
         <div class="settings-content">
-            <!-- Account Settings -->
+
             <div class="settings-section active" id="account">
                 <h2 class="section-title"><i class="fas fa-user-cog"></i> Account Settings</h2>
                 
@@ -308,7 +305,6 @@
                 </div>
             </div>
 
-            <!-- Notification Settings -->
             <div class="settings-section" id="notifications">
                 <h2 class="section-title"><i class="fas fa-bell"></i> Notification Settings</h2>
                 
@@ -380,7 +376,7 @@
                 </div>
             </div>
 
-            <!-- Security Settings -->
+    
             <div class="settings-section" id="security">
                 <h2 class="section-title"><i class="fas fa-shield-alt"></i> Security Settings</h2>
                 
@@ -435,20 +431,18 @@
             item.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Remove active class from all menu items
                 document.querySelectorAll('.settings-menu-item').forEach(i => {
                     i.classList.remove('active');
                 });
                 
-                // Add active class to clicked item
+
                 this.classList.add('active');
                 
-                // Hide all sections
                 document.querySelectorAll('.settings-section').forEach(section => {
                     section.classList.remove('active');
                 });
                 
-                // Show selected section
+
                 const sectionId = this.getAttribute('data-section');
                 document.getElementById(sectionId).classList.add('active');
             });
