@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #e74c3c; /* Red for emergency alerts */
+            --primary-color: #e74c3c; 
             --secondary-color: #3498db;
             --success-color: #2ecc71;
             --warning-color: #f39c12;
@@ -30,7 +30,7 @@
             background-color: #f9f9f9;
         }
 
-        /* Sidebar Styles */
+       
         .sidebar {
             width: var(--sidebar-width);
             background: linear-gradient(135deg, #2c3e50, #4a89dc);
@@ -92,14 +92,14 @@
             text-align: center;
         }
 
-        /* Main Content Styles */
+        
         .main-content {
             flex: 1;
             margin-left: var(--sidebar-width);
             transition: all 0.3s;
         }
 
-        /* Top Navigation */
+       
         .top-nav {
             display: flex;
             justify-content: space-between;
@@ -163,7 +163,7 @@
             margin-right: 10px;
         }
 
-        /* SOS Emergency Content */
+       
         .sos-content {
             padding: 25px;
         }
@@ -222,7 +222,7 @@
             background-color: #2980b9;
         }
 
-        /* Emergency Alerts Section */
+       
         .emergency-alerts {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -314,7 +314,7 @@
             gap: 10px;
         }
 
-        /* SOS Trigger Button */
+       
         .sos-trigger-container {
             text-align: center;
             margin-bottom: 30px;
@@ -347,7 +347,7 @@
             margin-right: 8px;
         }
 
-        /* Responsive Styles */
+       
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -372,7 +372,7 @@
                 margin-bottom: 15px;
             }
         }
-        /* Notification Dropdown Styles */
+       
 .notification {
   position: relative;
   cursor: pointer;
@@ -435,7 +435,7 @@
   color: var(--primary-color);
   font-size: 0.9rem;
 }
-/* User Profile Dropdown Styles */
+
 .user-profile {
   position: relative;
   cursor: pointer;
@@ -458,7 +458,7 @@
   flex-direction: column;
 }
 
-/* Show dropdown when parent is hovered OR has active class */
+
 .user-profile:hover .profile-dropdown,
 .user-profile.active .profile-dropdown {
   display: flex;
@@ -494,7 +494,7 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar Navigation -->
+   
     <div class="sidebar">
         <div class="sidebar-header">
             <i class="fas fa-hands-helping" style="font-size: 1.8rem;"></i>
@@ -523,9 +523,9 @@
         </div>
     </div>
 
-    <!-- Main Content Area -->
+   
     <div class="main-content">
-        <!-- Top Navigation Bar -->
+       
         <div class="top-nav">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
@@ -533,7 +533,7 @@
             </div>
 
             <div class="user-menu">
-                <!-- In the top-nav section, replace the notification div with this: -->
+           
 <div class="notification">
     <i class="fas fa-bell"></i>
     <span class="badge">2</span>
@@ -572,14 +572,14 @@
             </div>
         </div>
 
-        <!-- SOS Emergency Content -->
+        
         <div class="sos-content">
             <div class="page-header">
                 <h2><i class="fas fa-bell"></i> Emergency Alert System</h2>
                 <button class="btn btn-secondary"><i class="fas fa-history"></i> Alert History</button>
             </div>
 
-            <!-- SOS Trigger Button -->
+           
             <div class="sos-trigger-container">
                 <button class="sos-trigger-btn" id="triggerSOS">
                     <i class="fas fa-bell"></i> SOS
@@ -587,13 +587,13 @@
                 <p>Press in case of emergency to notify all volunteers</p>
             </div>
 
-            <!-- Active Alerts Section -->
+           
             <h3 style="margin-bottom: 20px; color: var(--danger-color);">
                 <i class="fas fa-exclamation-triangle"></i> Active Emergency Alerts
             </h3>
 
             <div class="emergency-alerts">
-                <!-- Alert Card 1 (Critical) -->
+               
                 <div class="alert-card critical">
                     <div class="alert-header">
                         <h3 class="alert-title">Medical Emergency</h3>
@@ -612,7 +612,7 @@
                     </div>
                 </div>
 
-                <!-- Alert Card 2 (Warning) -->
+               
                 <div class="alert-card warning">
                     <div class="alert-header">
                         <h3 class="alert-title">Security Threat</h3>
@@ -632,13 +632,13 @@
                 </div>
             </div>
 
-            <!-- Recent Resolved Alerts -->
+          
             <h3 style="margin-bottom: 20px; color: var(--success-color);">
                 <i class="fas fa-check-circle"></i> Recently Resolved Alerts
             </h3>
 
             <div class="emergency-alerts">
-                <!-- Resolved Alert Card -->
+            
                 <div class="alert-card info">
                     <div class="alert-header">
                         <h3 class="alert-title">Lost Child Found</h3>
@@ -659,7 +659,7 @@
         </div>
     </div>
 
-    <!-- SOS Confirmation Modal -->
+  
     <div class="modal" id="sosModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -698,7 +698,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // SOS Trigger Button
+          
             const triggerSOS = document.getElementById('triggerSOS');
             const sosModal = document.getElementById('sosModal');
             const closeBtns = document.querySelectorAll('.close-btn, .close-modal');
@@ -713,28 +713,25 @@
                 });
             });
 
-            // Close modal when clicking outside
+           
             window.addEventListener('click', function(e) {
                 if (e.target === sosModal) {
                     sosModal.style.display = 'none';
                 }
             });
 
-            // In a real app, you would connect to a backend API to send alerts
-            // Example: 
-            // fetch('/api/trigger-sos', { method: 'POST', body: JSON.stringify(alertData) })
         });
     </script>
     <script>
-        // Toggle dropdown on click
+       
         document.getElementById('userProfile').addEventListener('click', function(e) {
-          // Prevent closing when clicking inside dropdown
+          
           if (!e.target.closest('.profile-dropdown')) {
             this.classList.toggle('active');
           }
         });
       
-        // Close when clicking elsewhere
+   
         document.addEventListener('click', function(e) {
           const profile = document.getElementById('userProfile');
           if (!e.target.closest('#userProfile')) {
