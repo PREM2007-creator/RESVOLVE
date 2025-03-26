@@ -25,7 +25,7 @@
             background-color: #f9f9f9;
         }
 
-        /* Header/Navbar (Consistent with other pages) */
+        
         .top-nav {
             display: flex;
             justify-content: space-between;
@@ -43,7 +43,7 @@
             gap: 10px;
         }
 
-        /* Main Content Container */
+
         .profile-container {
             max-width: 1200px;
             margin: 30px auto;
@@ -53,7 +53,7 @@
             gap: 30px;
         }
 
-        /* Profile Sidebar */
+     
         .profile-sidebar {
             background: white;
             border-radius: 8px;
@@ -109,7 +109,7 @@
             color: #777;
         }
 
-        /* Profile Content */
+    
         .profile-content {
             background: white;
             border-radius: 8px;
@@ -163,7 +163,7 @@
             background-color: #2980b9;
         }
 
-        /* Recent Activity */
+    
         .activity-item {
             display: flex;
             gap: 15px;
@@ -198,7 +198,7 @@
             margin-top: 5px;
         }
 
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
             .profile-container {
                 grid-template-columns: 1fr;
@@ -208,7 +208,7 @@
                 grid-template-columns: 1fr;
             }
         }
-        /* Save Button Section */
+     
 .save-section {
   display: none;
   text-align: right;
@@ -244,7 +244,7 @@
     </style>
 </head>
 <body>
-    <!-- Top Navigation (Consistent with other pages) -->
+  
     <div class="top-nav">
         <div class="logo">
             <h2><i class="fas fa-hands-helping"></i> NGO Admin Portal</h2>
@@ -255,9 +255,9 @@
         </div>
     </div>
 
-    <!-- Main Profile Content -->
+   
     <div class="profile-container">
-        <!-- Profile Sidebar -->
+       
         <div class="profile-sidebar">
             <div class="profile-header">
                 <img src="https://randomuser.me/api/portraits/women/45.jpg" class="profile-pic" alt="Profile Picture">
@@ -293,7 +293,7 @@
             </div>
         </div>
 
-        <!-- Profile Main Content -->
+        
         <div class="profile-content">
             <h3 class="section-title">Personal Information</h3>
             
@@ -350,7 +350,7 @@
                 </div>
             </div>
         </div>
-        <!-- Add this before closing </div> of profile-content -->
+       
 <div class="save-section">
     <button class="save-btn" id="saveProfile">
       <i class="fas fa-save"></i> Save Changes
@@ -362,25 +362,25 @@
     </div>
 
     <script>
-        // Add this to your existing JavaScript
+        
         document.querySelector('.edit-btn').addEventListener('click', function() {
             alert('Edit profile functionality would open a form here');
-            // In a real implementation, this would show editable fields
+     
         });
     </script>
     <script>
-        // Toggle edit mode
+        
         document.querySelector('.edit-btn').addEventListener('click', function() {
           document.querySelector('.profile-content').classList.add('editing');
         });
       
-        // Save functionality
+        
         document.getElementById('saveProfile').addEventListener('click', function() {
-          alert('Changes saved!'); // Replace with actual save logic
+          alert('Changes saved!'); 
           document.querySelector('.profile-content').classList.remove('editing');
         });
       
-        // Cancel edit
+      
         document.getElementById('cancelEdit').addEventListener('click', function() {
           document.querySelector('.profile-content').classList.remove('editing');
         });

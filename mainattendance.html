@@ -30,7 +30,7 @@
             background-color: #f0f2f5;
         }
         
-        /* Sidebar Styles */
+     
         .sidebar {
             width: var(--sidebar-width);
             background: linear-gradient(135deg, #2c3e50, #4a89dc);
@@ -92,14 +92,14 @@
             text-align: center;
         }
         
-        /* Main Content Styles */
+
         .main-content {
             flex: 1;
             margin-left: var(--sidebar-width);
             transition: all 0.3s;
         }
         
-        /* Top Navigation */
+
         .top-nav {
             display: flex;
             justify-content: space-between;
@@ -163,7 +163,7 @@
             margin-right: 10px;
         }
         
-        /* Attendance Content */
+       
         .attendance-content {
             padding: 25px;
         }
@@ -224,7 +224,7 @@
             background-color: #d14532;
         }
         
-        /* Filter Bar */
+       
         .filter-bar {
             display: flex;
             justify-content: space-between;
@@ -249,7 +249,7 @@
             font-size: 0.9rem;
         }
         
-        /* Attendance Summary */
+ 
         .attendance-summary {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -288,7 +288,7 @@
             color: var(--warning-color);
         }
         
-        /* Attendance Table */
+    
         .attendance-table-container {
             background-color: white;
             border-radius: 8px;
@@ -372,7 +372,7 @@
             color: var(--primary-color);
         }
         
-        /* Check-in Modal */
+  
         .modal {
             display: none;
             position: fixed;
@@ -424,7 +424,7 @@
             color: #777;
         }
         
-        /* Form Styles */
+    
         .form-group {
             margin-bottom: 20px;
         }
@@ -460,7 +460,7 @@
             flex: 1;
         }
         
-        /* Responsive Styles */
+        
         @media (max-width: 992px) {
             .form-row {
                 flex-direction: column;
@@ -509,7 +509,7 @@
                 grid-template-columns: 1fr;
             }
         }
-        /* Notification Dropdown Styles */
+      
 .notification {
   position: relative;
   cursor: pointer;
@@ -572,7 +572,6 @@
   color: var(--primary-color);
   font-size: 0.9rem;
 }
-/* User Profile Dropdown Styles */
 .user-profile {
   position: relative;
   cursor: pointer;
@@ -595,7 +594,6 @@
   flex-direction: column;
 }
 
-/* Show dropdown when parent is hovered OR has active class */
 .user-profile:hover .profile-dropdown,
 .user-profile.active .profile-dropdown {
   display: flex;
@@ -631,7 +629,7 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar Navigation -->
+    
     <div class="sidebar">
         <div class="sidebar-header">
             <i class="fas fa-hands-helping" style="font-size: 1.8rem;"></i>
@@ -660,9 +658,9 @@
         </div>
     </div>
     
-    <!-- Main Content Area -->
+    
     <div class="main-content">
-        <!-- Top Navigation Bar -->
+        
         <div class="top-nav">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
@@ -670,7 +668,7 @@
             </div>
             
             <div class="user-menu">
-                <!-- In the top-nav section, replace the notification div with this: -->
+   
 <div class="notification">
     <i class="fas fa-bell"></i>
     <span class="badge">2</span>
@@ -709,7 +707,7 @@
             </div>
         </div>
         
-        <!-- Attendance Content -->
+       
         <div class="attendance-content">
             <div class="page-header">
                 <h2><i class="fas fa-calendar-alt"></i> Volunteer Attendance</h2>
@@ -719,7 +717,7 @@
                 </div>
             </div>
             
-            <!-- Filter Bar -->
+         
             <div class="filter-bar">
                 <div class="filter-group">
                     <select class="filter-control">
@@ -744,7 +742,7 @@
                 <button class="btn btn-primary"><i class="fas fa-filter"></i> Apply Filters</button>
             </div>
             
-            <!-- Attendance Summary -->
+           
             <div class="attendance-summary">
                 <div class="summary-card">
                     <h3>Total Volunteers</h3>
@@ -767,7 +765,7 @@
                 </div>
             </div>
             
-            <!-- Attendance Table -->
+           
             <div class="attendance-table-container">
                 <table>
                     <thead>
@@ -866,8 +864,7 @@
             </div>
         </div>
     </div>
-    
-    <!-- Check-in Modal -->
+   
     <div class="modal" id="checkInModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -931,7 +928,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Modal functionality
+         
             const bulkCheckInBtn = document.getElementById('bulkCheckInBtn');
             const checkInModal = document.getElementById('checkInModal');
             const closeBtns = document.querySelectorAll('.close-btn, .close-modal');
@@ -946,33 +943,32 @@
                 });
             });
             
-            // Close modal when clicking outside
             window.addEventListener('click', function(e) {
                 if (e.target === checkInModal) {
                     checkInModal.style.display = 'none';
                 }
             });
             
-            // Individual check-in buttons
+            
             const checkInButtons = document.querySelectorAll('[title="Check-in"]');
             checkInButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // In a real app, you would populate the modal with the volunteer's info
+                   
                     checkInModal.style.display = 'flex';
                 });
             });
         });
     </script>
     <script>
-        // Toggle dropdown on click
+        
         document.getElementById('userProfile').addEventListener('click', function(e) {
-          // Prevent closing when clicking inside dropdown
+         
           if (!e.target.closest('.profile-dropdown')) {
             this.classList.toggle('active');
           }
         });
       
-        // Close when clicking elsewhere
+        
         document.addEventListener('click', function(e) {
           const profile = document.getElementById('userProfile');
           if (!e.target.closest('#userProfile')) {
