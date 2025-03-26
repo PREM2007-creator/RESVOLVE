@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESOLVE - Forgot Password</title>
+    <style>
+        :root {
+            --primary: #1976D2;
+            --primary-light: #42A5F5;
+            --primary-dark: #1565C0;
+            --secondary: #FFC107;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --dark-gray: #212121;
+            --gray: #757575;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+        }
+        
+        /* Left Side - Nature Image Slideshow */
+        .slideshow-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .slide-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Right Side - Password Reset Form */
+        .password-container {
+            width: 40%;
+            min-width: 450px;
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+        }
+        
+        .logo {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .logo img {
+            height: 100px;
+            margin-bottom: 1rem;
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .logo p {
+            color: var(--primary-light);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .password-form {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.2);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .instructions {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .success-message {
+            display: none;
+            background-color: rgba(25, 118, 210, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .slideshow-container {
+                height: 300px;
+            }
+            
+            .password-container {
+                width: 100%;
+                min-width: auto;
+                padding: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <!-- Left Side - Nature Image Slideshow -->
+    <div class="slideshow-container">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+            <div class="slide-overlay">
+                <h3>Renew Your Connection</h3>
+                <p>Just like nature renews itself, renew your access to our volunteer community</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+            <div class="slide-overlay">
+                <h3>Restore Your Access</h3>
+                <p>Get back to making a difference in environmental conservation</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1429087969512-1e85aab2683d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+            <div class="slide-overlay">
+                <h3>Grow With Us</h3>
+                <p>Continue your journey as an environmental volunteer</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Side - Password Reset Form -->
+    <div class="password-container">
+        <div class="logo">
+            <img src="LOGO1.png" alt="RESOLVE Logo"></a>
+            <h1>RESOLVE</h1>
+            <p>Environmental Volunteer Network</p>
+        </div>
+        
+        <form class="password-form" id="passwordForm">
+            <h2 style="color: var(--primary-dark); margin-bottom: 1rem; text-align: center;">Forgot Password</h2>
+            <p class="instructions">Enter your email address and we'll send you a link to reset your password.</p>
+            
+            <div id="successMessage" class="success-message">
+                <span class="material-icons" style="vertical-align: middle; color: var(--primary);">check_circle</span>
+                <span style="vertical-align: middle;">Password reset link sent! Check your email.</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Send Reset Link</button>
+            
+            <div class="login-link">
+                Remember your password? <a href="index.html">Log in</a>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Image slideshow functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+        
+        // Form submission
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // In a real app, you would send a reset link to the email here
+            // For demo purposes, we'll just show the success message
+            
+            // Reset form
+            this.reset();
+            
+            // Hide form and show only success message after a delay
+            setTimeout(() => {
+                document.querySelector('.password-form h2').style.display = 'none';
+                document.querySelector('.instructions').style.display = 'none';
+                document.querySelector('.form-group').style.display = 'none';
+                document.querySelector('.btn-primary').style.display = 'none';
+            }, 1500);
+        });
+        
+        // Initialize slideshow
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
