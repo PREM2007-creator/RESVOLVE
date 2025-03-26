@@ -29,7 +29,7 @@
             background-color: var(--light-gray);
         }
         
-        /* Left Side - Nature Image Slideshow */
+    
         .slideshow-container {
             flex: 1;
             position: relative;
@@ -66,7 +66,7 @@
             margin-bottom: 0.5rem;
         }
         
-        /* Right Side - Password Reset Form */
+     
         .password-container {
             width: 40%;
             min-width: 450px;
@@ -203,7 +203,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <!-- Left Side - Nature Image Slideshow -->
+  
     <div class="slideshow-container">
         <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
             <div class="slide-overlay">
@@ -257,7 +257,7 @@
     </div>
     
     <script>
-        // Image slideshow functionality
+        
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         
@@ -271,23 +271,19 @@
             showSlide(currentSlide + 1);
         }
         
-        // Change slide every 5 seconds
         setInterval(nextSlide, 5000);
         
-        // Form submission
+   
         document.getElementById('passwordForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Show success message
+            
             document.getElementById('successMessage').style.display = 'block';
+        
             
-            // In a real app, you would send a reset link to the email here
-            // For demo purposes, we'll just show the success message
-            
-            // Reset form
             this.reset();
             
-            // Hide form and show only success message after a delay
+            
             setTimeout(() => {
                 document.querySelector('.password-form h2').style.display = 'none';
                 document.querySelector('.instructions').style.display = 'none';
@@ -296,7 +292,7 @@
             }, 1500);
         });
         
-        // Initialize slideshow
+        
         document.addEventListener('DOMContentLoaded', function() {
             showSlide(0);
         });
