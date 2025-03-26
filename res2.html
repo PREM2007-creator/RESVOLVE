@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        main {
+            margin: 20px;
+        }
+        .welcome-message {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .dashboard-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: 80%;
+            max-width: 600px;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+        }
+        .logout-button {
+            background-color: #f44336; /* Red */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>User Dashboard</h1>
+</header>
+
+<main>
+    <div class="dashboard-content">
+        <div class="welcome-message">Welcome, [Username]!</div>
+        <p>This is your dashboard where you can manage your account and settings.</p>
+        <ul>
+            <li><a href="#">View Profile</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Notifications</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+</main>
+
+
+
+<footer>
+    <p>&copy; 2025 ResVolve</p>
+</footer>
+
+<script>
+    function logout() {
+        alert("You have been logged out.");
+        window.location.href = "frontpage.html"; 
+    }
+</script>
+
+</body>
+</html>

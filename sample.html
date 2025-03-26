@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>University Management System</title>
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.left-half, .right-half {
+    flex: 1;
+    position: relative;
+}
+
+.left-half {
+    background-color: #f1f1f1;
+    overflow: hidden;
+}
+
+.right-half {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    display: none;
+    width: 157%;
+    height: auto;
+}
+
+@keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+.logo img {
+    width: 150px; /* Adjust the size as needed */
+    margin-bottom: 20px;
+}
+
+.login-form {
+    width: 300px;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    margin-top: 10px;
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links a {
+    display: block;
+    text-align: center;
+}
+</style>
+<body>
+    
+    <div class="container">
+        <div class="left-half">
+            <div class="slideshow-container">
+                <img class="slide" src="slide1.jpeg" alt="Slide 1">
+                <img class="slide" src="slide2.jpeg" alt="Slide 2">
+                <img class="slide" src="slide3.jpeg" alt="Slide 3">
+                <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+                <button class="next" onclick="plusSlides(1)">&#10095;</button>
+            </div>
+        </div>
+        <div class="right-half">
+            <div class="logo">
+                <img src="resvolvelogo.jpeg" alt="ResVolve">
+            </div>
+            <div class="login-form">
+                <h2>Log In</h2>
+                <form>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    
+                    <button type="submit">Login</button>
+                </form>
+                <div class="footer-links">
+                    <a href="#">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+<script>
+    let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    let slides = document.getElementsByClassName("slide");
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    slides[slideIndex - 1].style.display = "block";  
+    setTimeout(showSlides, 2000); // Change slide every 2 seconds
+}
+
+function plusSlides(n) {
+    slideIndex += n - 1; // Adjust index
+    showSlides();
+}
+</script>
+</html>

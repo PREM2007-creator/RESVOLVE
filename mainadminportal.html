@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Admin Portal | Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a89dc;
+            --secondary-color: #3bafda;
+            --success-color: #8cc152;
+            --warning-color: #f6bb42;
+            --danger-color: #e9573f;
+            --dark-color: #434a54;
+            --light-color: #f5f7fa;
+            --sidebar-width: 250px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(135deg, #2c3e50, #4a89dc);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sidebar-header h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-left: 10px;
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .sidebar-menu h4 {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            padding: 0 20px 10px;
+            margin-top: 20px;
+        }
+        
+        .sidebar-menu ul {
+            list-style: none;
+        }
+        
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .sidebar-menu li a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: all 0.3s;
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f5f7fa;
+            border-radius: 20px;
+            padding: 8px 15px;
+            width: 300px;
+        }
+        
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding: 0 10px;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-menu .notification {
+            position: relative;
+            margin-right: 20px;
+        }
+        
+        .user-menu .notification .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-profile img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        /* Admin Panel Content */
+        .admin-content {
+            padding: 25px;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .page-header h2 {
+            color: var(--dark-color);
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a70c2;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #7aac48;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #d14532;
+        }
+        
+        /* Data Tables */
+        .data-table-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status.active {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status.inactive {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .status.pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            margin: 0 3px;
+            color: var(--dark-color);
+            transition: all 0.3s;
+        }
+        
+        .action-btn:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Form Styles */
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 80%;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-bar {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        /* Notification Dropdown Styles */
+.notification {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 300px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  z-index: 1000;
+  display: none;
+}
+
+.notification:hover .notification-dropdown {
+  display: block;
+}
+
+.notification-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-icon {
+  font-size: 1.2rem;
+}
+
+.notification-icon .text-success {
+  color: var(--success-color);
+}
+
+.notification-icon .text-danger {
+  color: var(--danger-color);
+}
+
+.notification-content p {
+  margin-bottom: 5px;
+  color: var(--dark-color);
+}
+
+.notification-content small {
+  color: #777;
+  font-size: 0.8rem;
+}
+
+.view-all {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+/* User Profile Dropdown Styles */
+.user-profile {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 200px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+}
+
+/* Show dropdown when parent is hovered OR has active class */
+.user-profile:hover .profile-dropdown,
+.user-profile.active .profile-dropdown {
+  display: flex;
+}
+
+.profile-dropdown a {
+  padding: 10px 20px;
+  color: var(--dark-color);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.profile-dropdown a:hover {
+  background-color: #f5f7fa;
+  color: var(--primary-color);
+}
+
+.profile-dropdown a i {
+  width: 20px;
+  text-align: center;
+}
+
+.logout-btn {
+  color: var(--danger-color) !important;
+}
+
+.logout-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1) !important;
+}
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-hands-helping" style="font-size: 1.8rem;"></i>
+            <h3>NGO Admin Portal</h3>
+        </div>
+        
+        <div class="sidebar-menu">
+            <h4>Main</h4>
+            <ul>
+                <li><a href="maindashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="mainadminportal.html" class="active"><i class="fas fa-user-shield"></i> Admin Panel</a></li>
+                <li><a href="maineventpanel.html"><i class="fas fa-box-open"></i> Events</a></li>
+                <li><a href="mainattendance.html"><i class="fas fa-calendar-alt"></i> Attendance</a></li>
+                <li><a href="mainmatching.html"><i class="fas fa-clipboard-check"></i> Volunteer Matching</a></li>
+                <li><a href="mainsos.html"><i class="fas fa-bell"></i> SOS Alerts</a></li>
+            </ul>
+            
+            <h4>Management</h4>
+            <ul>
+                <li><a href="#"><i class="fas fa-tasks"></i> Projects</a></li>
+                <li><a href="donations.html"><i class="fas fa-hand-holding-usd"></i> Donations</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="user-management.html"><i class="fas fa-user-cog"></i> User Management</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Top Navigation Bar -->
+        <div class="top-nav">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search admin functions...">
+            </div>
+            
+            <div class="user-menu">
+                <!-- In the top-nav section, replace the notification div with this: -->
+<div class="notification">
+    <i class="fas fa-bell"></i>
+    <span class="badge">2</span>
+    <div class="notification-dropdown">
+      <div class="notification-item">
+        <div class="notification-icon">
+          <i class="fas fa-calendar-check text-success"></i>
+        </div>
+        <div class="notification-content">
+          <p>New volunteer registered for Health Camp</p>
+          <small>2 minutes ago</small>
+        </div>
+      </div>
+      <div class="notification-item">
+        <div class="notification-icon">
+          <i class="fas fa-exclamation-triangle text-danger"></i>
+        </div>
+        <div class="notification-content">
+          <p>Urgent: Medical supplies running low</p>
+          <small>15 minutes ago</small>
+        </div>
+      </div>
+      <a href="#" class="view-all">View all notifications</a>
+    </div>
+  </div>
+                
+  <div class="user-profile" id="userProfile">
+    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Admin User">
+    <span>Admin User</span>
+    <div class="profile-dropdown">
+      <a href="mainprofile.html"><i class="fas fa-user"></i> Profile</a>
+      <a href="mainsettings.html"><i class="fas fa-cog"></i> Settings</a>
+      <a href="mainlogout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    </div>
+  </div>
+            </div>
+        </div>
+        
+        <!-- Admin Panel Content -->
+        <div class="admin-content">
+            <div class="page-header">
+                <h2><i class="fas fa-user-shield"></i> Admin Panel</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" id="addAdminBtn"><i class="fas fa-plus"></i> Add Admin</button>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active" data-tab="admins">Admins</div>
+                <div class="tab" data-tab="permissions">Permissions</div>
+                <div class="tab" data-tab="audit-logs">Audit Logs</div>
+                <div class="tab" data-tab="system-settings">System Settings</div>
+            </div>
+            
+            <!-- Admins Tab -->
+            <div class="tab-content active" id="admins">
+                <div class="data-table-container">
+                    <div class="table-header">
+                        <h3>Admin Users</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-success"><i class="fas fa-file-export"></i> Export</button>
+                            <button class="btn btn-primary"><i class="fas fa-filter"></i> Filter</button>
+                        </div>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Last Login</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>AD001</td>
+                                <td>John Smith</td>
+                                <td>john@ngo.org</td>
+                                <td>Super Admin</td>
+                                <td>Today, 09:24 AM</td>
+                                <td><span class="status active">Active</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Deactivate"><i class="fas fa-ban"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>AD002</td>
+                                <td>Sarah Johnson</td>
+                                <td>sarah@ngo.org</td>
+                                <td>Volunteer Manager</td>
+                                <td>Yesterday, 03:45 PM</td>
+                                <td><span class="status active">Active</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Deactivate"><i class="fas fa-ban"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>AD003</td>
+                                <td>Michael Brown</td>
+                                <td>michael@ngo.org</td>
+                                <td>Resource Manager</td>
+                                <td>Jun 10, 11:20 AM</td>
+                                <td><span class="status active">Active</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Deactivate"><i class="fas fa-ban"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>AD004</td>
+                                <td>Emily Davis</td>
+                                <td>emily@ngo.org</td>
+                                <td>Event Coordinator</td>
+                                <td>Jun 8, 04:15 PM</td>
+                                <td><span class="status inactive">Inactive</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Activate"><i class="fas fa-check"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>AD005</td>
+                                <td>Robert Wilson</td>
+                                <td>robert@ngo.org</td>
+                                <td>Donation Manager</td>
+                                <td>Jun 5, 10:00 AM</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn" title="Approve"><i class="fas fa-check-circle"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Permissions Tab -->
+            <div class="tab-content" id="permissions">
+                <div class="data-table-container">
+                    <div class="table-header">
+                        <h3>Role Permissions</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Role</button>
+                        </div>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Dashboard</th>
+                                <th>Volunteers</th>
+                                <th>Resources</th>
+                                <th>Events</th>
+                                <th>Donations</th>
+                                <th>Reports</th>
+                                <th>Settings</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Super Admin</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Volunteer Manager</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Resource Manager</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Event Coordinator</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Donation Manager</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td>
+                                    <button class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Audit Logs Tab -->
+            <div class="tab-content" id="audit-logs">
+                <div class="data-table-container">
+                    <div class="table-header">
+                        <h3>System Audit Logs</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-success"><i class="fas fa-file-export"></i> Export</button>
+                            <button class="btn btn-primary"><i class="fas fa-filter"></i> Filter</button>
+                        </div>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Entity</th>
+                                <th>Details</th>
+                                <th>IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Today, 10:15 AM</td>
+                                <td>John Smith</td>
+                                <td>Login</td>
+                                <td>System</td>
+                                <td>Successful login</td>
+                                <td>192.168.1.1</td>
+                            </tr>
+                            <tr>
+                                <td>Today, 09:45 AM</td>
+                                <td>Sarah Johnson</td>
+                                <td>Update</td>
+                                <td>Volunteer</td>
+                                <td>Updated volunteer ID: V023</td>
+                                <td>192.168.1.2</td>
+                            </tr>
+                            <tr>
+                                <td>Today, 09:30 AM</td>
+                                <td>Michael Brown</td>
+                                <td>Create</td>
+                                <td>Resource</td>
+                                <td>Added new medical supplies</td>
+                                <td>192.168.1.3</td>
+                            </tr>
+                            <tr>
+                                <td>Yesterday, 05:20 PM</td>
+                                <td>John Smith</td>
+                                <td>Delete</td>
+                                <td>Event</td>
+                                <td>Deleted past event</td>
+                                <td>192.168.1.1</td>
+                            </tr>
+                            <tr>
+                                <td>Yesterday, 03:45 PM</td>
+                                <td>Emily Davis</td>
+                                <td>Failed Login</td>
+                                <td>System</td>
+                                <td>Incorrect password</td>
+                                <td>192.168.1.4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- System Settings Tab -->
+            <div class="tab-content" id="system-settings">
+                <div class="form-container">
+                    <h3>System Configuration</h3>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label>Organization Name</label>
+                            <input type="text" class="form-control" value="Helping Hands NGO">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Organization Logo</label>
+                            <input type="file" class="form-control">
+                            <small class="text-muted">Recommended size: 200x200 pixels</small>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Default Timezone</label>
+                                <select class="form-control">
+                                    <option>UTC</option>
+                                    <option selected>America/New_York</option>
+                                    <option>America/Chicago</option>
+                                    <option>America/Los_Angeles</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Date Format</label>
+                                <select class="form-control">
+                                    <option>MM/DD/YYYY</option>
+                                    <option selected>DD/MM/YYYY</option>
+                                    <option>YYYY-MM-DD</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>System Email</label>
+                            <input type="email" class="form-control" value="noreply@helpinghands.org">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>SMTP Configuration</label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="SMTP Host" value="smtp.helpinghands.org">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Port" value="587">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Username" value="noreply@helpinghands.org">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password" value="********">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Login Security</label>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="twoFactor" checked>
+                                <label class="form-check-label" for="twoFactor">Enable Two-Factor Authentication</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="passwordReset" checked>
+                                <label class="form-check-label" for="passwordReset">Require Password Reset Every 90 Days</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-footer">
+                            <button type="button" class="btn btn-danger">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Admin Modal -->
+    <div class="modal" id="addAdminModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Admin</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" placeholder="Enter full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" class="form-control" placeholder="Enter email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select class="form-control">
+                            <option>Select a role</option>
+                            <option>Super Admin</option>
+                            <option>Volunteer Manager</option>
+                            <option>Resource Manager</option>
+                            <option>Event Coordinator</option>
+                            <option>Donation Manager</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Temporary Password</label>
+                        <input type="password" class="form-control" placeholder="Enter temporary password">
+                        <small class="text-muted">User will be required to change password on first login</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger close-modal">Cancel</button>
+                <button class="btn btn-primary">Create Admin</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and content
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Modal functionality
+            const addAdminBtn = document.getElementById('addAdminBtn');
+            const addAdminModal = document.getElementById('addAdminModal');
+            const closeBtns = document.querySelectorAll('.close-btn, .close-modal');
+            
+            addAdminBtn.addEventListener('click', function() {
+                addAdminModal.style.display = 'flex';
+            });
+            
+            closeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    addAdminModal.style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === addAdminModal) {
+                    addAdminModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script>
+        // Toggle dropdown on click
+        document.getElementById('userProfile').addEventListener('click', function(e) {
+          // Prevent closing when clicking inside dropdown
+          if (!e.target.closest('.profile-dropdown')) {
+            this.classList.toggle('active');
+          }
+        });
+      
+        // Close when clicking elsewhere
+        document.addEventListener('click', function(e) {
+          const profile = document.getElementById('userProfile');
+          if (!e.target.closest('#userProfile')) {
+            profile.classList.remove('active');
+          }
+        });
+      </script>
+</body>
+</html>
