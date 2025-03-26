@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RESOLVE - Volunteer Sign Up</title>
+    <title>RESOLVE - Forgot Password</title>
     <style>
         :root {
             --primary: #1976D2;
@@ -66,8 +66,8 @@
             margin-bottom: 0.5rem;
         }
         
-        /* Right Side - Sign Up Form */
-        .signup-container {
+        /* Right Side - Password Reset Form */
+        .password-container {
             width: 40%;
             min-width: 450px;
             background-color: var(--white);
@@ -101,7 +101,7 @@
             margin-top: 0.5rem;
         }
         
-        .signup-form {
+        .password-form {
             width: 100%;
             max-width: 400px;
         }
@@ -132,15 +132,6 @@
             box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.2);
         }
         
-        .form-row {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
         .btn {
             width: 100%;
             padding: 0.75rem;
@@ -153,48 +144,12 @@
         }
         
         .btn-primary {
-            background-color: #42A5F5;
-            color: rgb(255, 255, 255);
+            background-color: var(--primary);
+            color: white;
         }
         
         .btn-primary:hover {
-            background-color: #23588d;
-        }
-        
-        .btn-google {
-            background-color: #4594ed;
-            color: #1976D2;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-google:hover {
-            background-color:#1a75bf;
-        }
-        
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .divider::before, .divider::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .divider::before {
-            margin-right: 1rem;
-        }
-        
-        .divider::after {
-            margin-left: 1rem;
+            background-color: var(--primary-dark);
         }
         
         .login-link {
@@ -212,6 +167,22 @@
             text-decoration: underline;
         }
         
+        .instructions {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .success-message {
+            display: none;
+            background-color: rgba(25, 118, 210, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
@@ -222,7 +193,7 @@
                 height: 300px;
             }
             
-            .signup-container {
+            .password-container {
                 width: 100%;
                 min-width: auto;
                 padding: 2rem;
@@ -236,39 +207,40 @@
     <div class="slideshow-container">
         <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
             <div class="slide-overlay">
-                <h3>Connect With Nature</h3>
-                <p>Join our environmental conservation efforts</p>
+                <h3>Renew Your Connection</h3>
+                <p>Just like nature renews itself, renew your access to our volunteer community</p>
             </div>
         </div>
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
             <div class="slide-overlay">
-                <h3>Restore Ecosystems</h3>
-                <p>Help preserve natural habitats and wildlife</p>
+                <h3>Restore Your Access</h3>
+                <p>Get back to making a difference in environmental conservation</p>
             </div>
         </div>
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1429087969512-1e85aab2683d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
             <div class="slide-overlay">
-                <h3>Grow Green Spaces</h3>
-                <p>Join community gardening initiatives</p>
+                <h3>Grow With Us</h3>
+                <p>Continue your journey as an environmental volunteer</p>
             </div>
         </div>
     </div>
     
-    <!-- Right Side - Sign Up Form -->
-    <div class="signup-container">
+    <!-- Right Side - Password Reset Form -->
+    <div class="password-container">
         <div class="logo">
-           <img src="LOGO1.png" alt="RESOLVE Logo">
-            <h1>ResVolve</h1>
-            <p> Turn goodwill into action.</p>
+            <img src="LOGO1.png" alt="RESOLVE Logo"></a>
+            <h1>RESOLVE</h1>
+            <p> Turn goodwill into action.
+</p>
         </div>
         
-        <form class="signup-form" id="signupForm">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" id="name" class="form-control" required>
-                </div>
-                
+        <form class="password-form" id="passwordForm">
+            <h2 style="color: var(--primary-dark); margin-bottom: 1rem; text-align: center;">Forgot Password</h2>
+            <p class="instructions">Enter your email address and we'll send you a link to reset your password.</p>
+            
+            <div id="successMessage" class="success-message">
+                <span class="material-icons" style="vertical-align: middle; color: var(--primary);">check_circle</span>
+                <span style="vertical-align: middle;">Password reset link sent! Check your email.</span>
             </div>
             
             <div class="form-group">
@@ -276,43 +248,16 @@
                 <input type="email" id="email" class="form-control" required>
             </div>
             
-            <div class="form-group">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" class="form-control" minlength="8" required>
-                <small style="color: var(--gray); font-size: 0.8rem;">Minimum 8 characters</small>
-            </div> 
-            <div class="form-group">
-                <label for="c-password" class="form-label">Confirm Password</label>
-                <input type="password" id="cpassword" class="form-control" minlength="8" required>
-                <small style="color: var(--gray); font-size: 0.8rem;">Passwords should match</small>
-            </div>       
-          
-            <div class="form-group form-check">
-                <input type="checkbox" id="terms" class="form-check-input" required>
-                <label for="terms" class="form-check-label" style="font-size: 0.9rem;">
-                    I agree to the <a href="tos.html" style="color: var(--primary);">Terms of Service</a> and <a href="pp.html" style="color: var(--primary);">Privacy Policy</a>
-                </label>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Create Account</button>
-            <p id="signup-message"></p>
-            <div class="divider">OR</div>
-            
-            <button type="button" class="btn btn-google">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
-                </svg>
-                <a href  ="https://accounts.google.com/v3/signin/identifier?flowEntry=ServiceLogin&flowName=GlifWebSignIn&hl=en-GB&ifkv=AXH0vVsV4ZB3duaP2zwYOwBbAdn8Zpy8zwb5i1Yz491RpnhFc2ERvPSzX8VdxYE7bJ6xM8y_wszfgQ&dsh=S1914126651%3A1742966783436646 text" style="text-decoration: none;color: white;">Sign up with Google</a>
-            </button>
+            <button type="submit" class="btn btn-primary">Send Reset Link</button>
             
             <div class="login-link">
-                Already have an account? <a href="index.html">Log in</a>
+                Remember your password? <a href="index.html">Log in</a>
             </div>
         </form>
     </div>
     
     <script>
-        
+        // Image slideshow functionality
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         
@@ -326,32 +271,35 @@
             showSlide(currentSlide + 1);
         }
         
-       
+        // Change slide every 5 seconds
         setInterval(nextSlide, 5000);
         
-       
-        document.getElementById("signupForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const signupMessage = document.getElementById("signup-message");
-    signupMessage.textContent = "";
-    localStorage.setItem(email, password);
-    signupMessage.textContent = "Signup successful! Redirecting to login...";
-    signupMessage.style.color = "green";
-    setTimeout(() => {
-        window.location.href = "index.html";
-    }, 1000);
-});
+        // Form submission
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // In a real app, you would send a reset link to the email here
+            // For demo purposes, we'll just show the success message
+            
+            // Reset form
+            this.reset();
+            
+            // Hide form and show only success message after a delay
+            setTimeout(() => {
+                document.querySelector('.password-form h2').style.display = 'none';
+                document.querySelector('.instructions').style.display = 'none';
+                document.querySelector('.form-group').style.display = 'none';
+                document.querySelector('.btn-primary').style.display = 'none';
+            }, 1500);
+        });
         
-   
+        // Initialize slideshow
         document.addEventListener('DOMContentLoaded', function() {
             showSlide(0);
         });
-        
-
     </script>
 </body>
 </html>
