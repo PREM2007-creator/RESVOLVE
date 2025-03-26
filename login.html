@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background-color: #36AC6C; /* Header color */
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .logo-header {
+            width: 120px; /* Fit logo size within header */
+            height: auto;
+        }
+
+        .toggle-button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Main Container for the page */
+        .login-container {
+            display: flex;
+            flex-direction: row-reverse; /* Align the login form and slideshow */
+            width: 90%;
+            height: 80%;
+            max-width: 1200px; /* Increased size of the login container */
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 60px; /* Added margin for header */
+        }
+
+        /* Left side: Image slideshow */
+        .slideshow {
+            width: 60%; /* Increased the width for the slideshow */
+            background-color: #e0e0e0;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            animation: slide 6s infinite; /* Increased slideshow speed */
+        }
+
+        @keyframes slide {
+            0% {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            25% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Right side: Login Form */
+        .login-form {
+            width: 40%; /* Reduced width to make space for larger slideshow */
+            background-color: white;
+            padding: 40px; /* Increased padding to make the form bigger */
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .login-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 32px; /* Increased font size for the title */
+        }
+
+        .login-form input {
+            width: 80%;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px; /* Increased input font size */
+        }
+
+        .login-form button {
+            width: 80%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px; /* Increased button font size */
+        }
+
+        .login-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Logo on the right side of the page */
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 150px; /* Increased size of the logo */
+        }
+
+        .logo img {
+            width: 100%;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .login-form.dark-mode {
+            background-color: #444;
+        }
+
+        .login-form.dark-mode input {
+            background-color: #555;
+            color: #fff;
+            border: 1px solid #666;
+        }
+
+        .login-form.dark-mode button {
+            background-color: #777;
+        }
+
+        .login-form.dark-mode button:hover {
+            background-color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header with logo and toggle button -->
+<div class="header">
+    <img src="logo1.png" alt="Logo" class="logo-header"> <!-- Logo inside the header -->
+    <button class="toggle-button" onclick="toggleMode()">@</button>
+</div>
+
+<!-- Container for login page -->
+<div class="login-container">
+    <!-- Left side: Image Slideshow -->
+    <div class="slideshow">
+        <img src="1.jpg" alt="Slide 1">
+        <img src="2.jpg" alt="Slide 2">
+        <img src="3.jpg" alt="Slide 3">
+    </div>
+
+    <!-- Right side: Login Form -->
+    <div class="login-form">
+        <!-- Logo above login form -->
+        <div class="logo">
+            <img src="logo1.png" alt="Logo"> <!-- Adjust the image source as needed -->
+        </div>
+
+        <!-- Login Form -->
+        <h2>Login</h2>
+        <form action="#" method="POST">
+            <input type="text" placeholder="Username" id="username" name="username" required>
+            <input type="password" placeholder="Password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleMode() {
+        document.body.classList.toggle('dark-mode');
+        const loginForm = document.querySelector('.login-form');
+        loginForm.classList.toggle('dark-mode');
+
+        const toggleButton = document.querySelector('.toggle-button');
+        if (document.body.classList.contains('dark-mode')) {
+            toggleButton.textContent = 'Light Mode';
+        } else {
+            toggleButton.textContent = 'Dark Mode';
+        }
+    }
+</script>
+
+</body>
+</html>
